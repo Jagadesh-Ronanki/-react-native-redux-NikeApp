@@ -1,5 +1,6 @@
 import { StyleSheet, Text, View, Image, FlatList, useWindowDimensions, ScrollView, Pressable } from "react-native";
 import products from "../data/products";
+import { Ionicons } from "@expo/vector-icons";
 
 const ProductDetailsScreen = () => {
   const product = products[0];
@@ -40,6 +41,9 @@ const ProductDetailsScreen = () => {
       </Pressable>
 
       {/* Navigation icon */}
+      {/* <Pressable style={styles.icon}>
+        <Ionicons name='close' size={24} color="white" />
+      </Pressable> */}
     </View>
   );
 };
@@ -75,6 +79,14 @@ const styles = StyleSheet.create({
       fontWeight: '500',
       fontSize: 16,
     },
+    icon: {
+      position: 'absolute',
+      top: 50,
+      right: 20,
+      backgroundColor: '#000000AA',
+      borderRadius: 50,
+      padding: 5,
+    }
 });
 
 export default ProductDetailsScreen;
