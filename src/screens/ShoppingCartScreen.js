@@ -3,26 +3,26 @@ import CartListItem from '../components/CartListItem'
 import cart from '../data/cart'
 
 const ShoppingCartTotals = () => {
-  <View style={styles.totalsContainer}>
-    <View style={styles.row}>
-      <Text style={styles.text}>Subtotal</Text>
-      <Text style={styles.text}>410,00 US$</Text>
+  return(
+    <View style={styles.totalsContainer}>
+      <View style={styles.row}>
+        <Text style={styles.text}>Subtotal</Text>
+        <Text style={styles.text}>410,00 US$</Text>
+      </View>
+      <View style={styles.row}>
+        <Text style={styles.text}>Delivery</Text>
+        <Text style={styles.text}>10,00 US$</Text>
+      </View>
+      <View style={styles.row}>
+        <Text style={styles.textBold}>Total</Text>
+        <Text style={styles.textBold}>420,00 US$</Text>
+      </View>
     </View>
-    <View style={styles.row}>
-      <Text style={styles.text}>Delivery</Text>
-      <Text style={styles.text}>10,00 US$</Text>
-    </View>
-    <View style={styles.row}>
-      <Text style={styles.textBold}>Total</Text>
-      <Text style={styles.textBold}>420,00 US$</Text>
-    </View>
-  </View>
+  )
 }
 
 const ShoppingCartScreen = () => {
-    const checkout = () => {
-      
-    }
+    const checkout = () => {}
 
     return (
       <>
