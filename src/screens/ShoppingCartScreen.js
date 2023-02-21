@@ -1,21 +1,25 @@
 import { FlatList, View, Text, StyleSheet, Pressable } from 'react-native'
 import CartListItem from '../components/CartListItem'
-import cart from '../data/cart'
+import { useSelector } from 'react-redux' 
+import { selectSubtotal, selectDeliveryCharge, selectTotal } from '../store/cartSlice'
 
 const ShoppingCartTotals = () => {
+  const subtotal = useSelector(selectSubtotal)
+  const deliveryCharge = useSelector(selectDeliveryCharge)
+  const total = useSelector(selectTotal)
   return(
     <View style={styles.totalsContainer}>
       <View style={styles.row}>
         <Text style={styles.text}>Subtotal</Text>
-        <Text style={styles.text}>410,00 US$</Text>
+        <Text style={styles.text}>{subtotal}</Text>
       </View>
       <View style={styles.row}>
         <Text style={styles.text}>Delivery</Text>
-        <Text style={styles.text}>10,00 US$</Text>
+        <Text style={styles.text}>${deliveryCharge}</Text>
       </View>
       <View style={styles.row}>
         <Text style={styles.textBold}>Total</Text>
-        <Text style={styles.textBold}>420,00 US$</Text>
+        <Text style={styles.textBold}>${total}</Text>
       </View>
     </View>
   )
@@ -23,18 +27,26 @@ const ShoppingCartTotals = () => {
 
 const ShoppingCartScreen = () => {
     const checkout = () => {}
-
+    const cart = useSelector((state) => state.cart.cartItems)
     return (
       <>
-        <FlatList 
-          data={cart}
-          renderItem={({item}) => <CartListItem cartItem={item}/>} 
-          ListFooterComponent={ShoppingCartTotals}   
-        />
-        {/* Checkout Button */}
-        <Pressable onPress={checkout} style={styles.button}>
-          <Text style={styles.buttonText}>Checkout</Text>
-        </Pressable>
+      {
+        cart.length > 0 ? (
+          <>
+            <FlatList 
+              data={cart}
+              renderItem={({item}) => <CartListItem cartItem={item}/>} 
+              ListFooterComponent={ShoppingCartTotals}   
+            />
+            {/* Checkout Button */}
+            <Pressable onPress={checkout} style={styles.button}>
+              <Text style={styles.buttonText}>Checkout</Text>
+            </Pressable>
+          </>
+        ) : (
+          <Text style={styles.emptyCart}>Add items into bag 😉</Text>
+        )
+      }
       </>
     )
 }
@@ -74,6 +86,13 @@ const styles = StyleSheet.create({
     color: 'white',
     fontWeight: '500',
     fontSize: 16,
+  },
+  emptyCart: {
+    color: 'gray',
+    textAlign: 'center',
+    top: "45%",
+    /*left: "50%",
+    transform: "translate(-50%, -50%)" */
   },
 })
 
